@@ -1,0 +1,55 @@
+.backdrop {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(6px);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 200px);
+
+    .empty {
+        color: #CCFF00;
+        font-family: 'Gurajada';
+        font-size: 70px;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 300px 0 0 0;
+    }
+
+    .drinkContainer {
+        margin: 0;
+        border: 1px solid #ccff0040;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: #ccff0026;
+
+        img {
+            border-radius: 10px;
+        }
+
+        .drinkInfo {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 22px;
+
+            .drinkTitle {
+                font-size: 40px;
+                margin: 0 0 20px 0;
+            }
+        }
+    }
+}

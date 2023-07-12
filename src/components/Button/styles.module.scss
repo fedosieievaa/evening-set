@@ -1,0 +1,37 @@
+.buttonWrapper {
+    display: flex;
+    flex-direction: column;
+    & .button {
+        width: 200px;
+        height: 38px;
+        border-radius: 10px;
+        border: 2px solid #CF0;
+        background: rgba(217, 217, 217, 0.00);
+        cursor: pointer;
+        user-select: none;
+        background: none;
+        color: #FFF;
+        font-family: 'Imprima';
+        font-size: 18px;
+        text-transform: uppercase;
+
+        &.error {
+            background: rgb(223, 156, 156);
+            &:hover {
+                background: rgba(223, 156, 156, 0.637);
+            }
+        }
+        &.success {
+            background: rgb(112, 176, 102);
+            &:hover {
+                background: rgba(112, 176, 102, 0.552);
+            }
+        }
+        &.disabled {
+            background: rgb(80, 80, 80);
+            &:hover {
+                background: rgb(80, 80, 80);
+            }
+        }
+    }
+}

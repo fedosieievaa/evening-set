@@ -1,0 +1,21 @@
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 72px);
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 36px;
+    color: #FFF;
+    font-family: 'Imprima';
+    font-size: 22px;
+
+    .information {
+        display: flex;
+        gap: 20px;
+
+        div {
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}

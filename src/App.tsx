@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { GetEveningSet } from "containers/GetEveningSet";
+import { MoviesList } from "containers/MoviesList";
+import { Drink } from "containers/Drink";
+import { SignUp } from "containers/SignUp";
+import { SignIn } from "containers/SignIn";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<GetEveningSet />} />
+        <Route path="/movies-list" element={<MoviesList />} />
+        <Route path="/drink" element={<Drink />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
+      </Routes>
+    </Router>
   );
 }
 

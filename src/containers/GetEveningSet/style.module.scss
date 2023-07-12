@@ -1,0 +1,57 @@
+.filter {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    user-select: none;
+
+    label {
+        text-transform: uppercase;
+        margin: 0 10px 0 0;
+        font-family: 'Gurajada';
+        font-size: 45px;
+    }
+
+    .dropdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 50px 0;
+
+        select {
+            border: 1px solid #CCFF00;
+            background: #FFF;
+            background: none;
+            width: 150px;
+            height: 38px;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba(217, 217, 217, 0);
+            background: none;
+            color: #FFF;
+            font-family: "Imprima";
+            font-size: 18px;
+
+            option {
+                color: black;
+                border: 1px solid #CCFF00;
+            }
+        }
+    }
+
+    .checkbox {
+        display: flex;
+
+        input {
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}
+
+.getMovieButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,47 @@
+.container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.779);
+    overflow-y: auto;
+
+    & .modal {
+        position: relative;
+        padding: 40px;
+        border-radius: 10px;
+        border: 1px solid rgba(204, 255, 0, 0.064);
+        background: rgba(36, 36, 36, 0.434);
+
+    }
+
+    & .close {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        cursor: pointer;
+        color: rgb(255, 255, 255);
+
+        font-size: 36px;
+        font-weight: bold;
+        transform: scaleY(0.75);
+    }
+}
+
+.container.light {
+    background: rgba(255, 255, 255, 0.3);
+
+    & .modal {
+        background: rgb(198, 229, 236);
+    }
+
+    & .close {
+        color: rgb(131, 131, 223);
+    }
+}

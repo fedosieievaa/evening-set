@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 200px);
+}
+
+.backdrop {
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(6px);
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}

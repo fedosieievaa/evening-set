@@ -1,0 +1,64 @@
+.container {
+    h2 {
+        color: #CCFF00;
+
+        margin: 0 0 40px 0;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        .error{
+            position: absolute;
+            top: -25px;
+            left: 0;
+            color: rgb(253, 117, 117);
+        }
+        .input {
+            input {
+                width: calc(400px - 40px);
+                height: 38px;
+                padding: 0 20px;
+                margin: 0 0 20px 0;
+                border-radius: 10px;
+                border: 1px solid rgba(204, 255, 0, 0.386);
+                background: rgba(5, 5, 5, 0.599);
+                cursor: pointer;
+                user-select: none;
+                color: #FFF;
+                font-family: 'Imprima';
+                font-size: 18px;
+                outline: none;
+            }
+
+            input:-webkit-autofill,
+            input:-webkit-autofill:hover,
+            input:-webkit-autofill:focus,
+            input:-webkit-autofill:active {
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: #ffffff;
+                transition: background-color 5000s ease-in-out 0s;
+                box-shadow: inset 0 0 20px 20px rgba(5, 5, 5, 0.599);
+            }
+        }
+
+        button {
+            width: 150px;
+            height: 38px;
+            border-radius: 10px;
+            border: 1px solid rgba(204, 255, 0, 0.386);
+            background: rgba(0, 0, 0, 0.382);
+            cursor: pointer;
+            user-select: none;
+            color: #FFF;
+            font-family: 'Imprima';
+            font-size: 18px;
+            margin: 20px auto 0 auto;
+        }
+    }
+}
