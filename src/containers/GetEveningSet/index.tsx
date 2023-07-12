@@ -24,6 +24,8 @@ export const GetEveningSet = () => {
   const [generateDrink, setGenerateDrink] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDrinkLoading, setIsDrinkLoading] = useState(false);
+
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export const GetEveningSet = () => {
       const randomMovie = movies[randomIndex];
       const storage: any = localStorage.getItem(WATCHED_LIST);
       const previousList = storage ? JSON.parse(storage) : {};
-      console.log(previousList[activeUser]);
+
       const ids = previousList[activeUser]
         ? previousList[activeUser]?.map((m: any) => m.id)
         : [];
@@ -87,9 +89,11 @@ export const GetEveningSet = () => {
   }
 
   async function getRandomDrink() {
+    setIsDrinkLoading(true);
     const response = await fetch(DRINK_URL);
     const data = await response.json();
     setDrink(data.drinks[0]);
+    setIsDrinkLoading(false);
     if (activeUser) {
       const db = localStorage.getItem(DRINK);
       const drinks = db ? JSON.parse(db) || {} : {};
@@ -100,51 +104,54 @@ export const GetEveningSet = () => {
 
   return (
     <Layout>
-      <div className={style.filter}>
-        <div className={style.dropdown}>
-          <label htmlFor="genre">Select Genre:</label>
-          <select
-            id="genre"
-            onChange={(e) => {
-              setGenre(e.target.value);
-            }}
-          >
-            {genres.map((genre: any) => (
-              <option key={genre?.id} value={genre?.id}>
-                {genre?.name}
-              </option>
-            ))}
-          </select>
+      <div className={style.overflow}>
+        <div className={style.filter}>
+          <div className={style.dropdown}>
+            <label htmlFor="genre">Select Genre:</label>
+            <select
+              id="genre"
+              onChange={(e) => {
+                setGenre(e.target.value);
+              }}
+            >
+              {genres.map((genre: any) => (
+                <option key={genre?.id} value={genre?.id}>
+                  {genre?.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={style.checkbox}>
+            <label htmlFor="drink">Generate a drink:</label>
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                setGenerateDrink(e.target.checked);
+              }}
+            />
+          </div>
         </div>
-        <div className={style.checkbox}>
-          <label htmlFor="drink">Generate a drink:</label>
-          <input
-            type="checkbox"
-            onChange={(e) => {
-              setGenerateDrink(e.target.checked);
-            }}
-          />
-        </div>
-      </div>
-      <div className={style.getMovieButton}>
         {!movie && (
-          <Button
-            text="Get Evening Set"
-            status={isLoading ? "loading" : ""}
-            onClick={getEveningSet}
-          />
+          <div className={style.getMovieButton}>
+            <Button
+              text="Get Evening Set"
+              status={isLoading ? "loading" : ""}
+              onClick={getEveningSet}
+            />
+          </div>
         )}
+        <Set
+          movie={movie}
+          genres={genres}
+          getEveningSet={getEveningSet}
+          setMovie={setMovie}
+          setShowNotification={setShowNotification}
+          isLoading={isLoading}
+          drink={drink}
+          getRandomDrink={getRandomDrink}
+          isDrinkLoading={isDrinkLoading}
+        />
       </div>
-      <Set
-        movie={movie}
-        genres={genres}
-        getEveningSet={getEveningSet}
-        setMovie={setMovie}
-        setShowNotification={setShowNotification}
-        isLoading={isLoading}
-        drink={drink}
-        getRandomDrink={getRandomDrink}
-      />
       {showNotification && (
         <Notification
           message="Movie is added"

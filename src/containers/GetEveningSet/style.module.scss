@@ -55,3 +55,66 @@
     justify-content: center;
     align-items: center;
 }
+
+
+@media screen and (max-width:1440px) {
+    .filter {
+        label {
+            font-size: 28px;
+        }
+        .checkbox {
+            input {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .overflow{
+        height: calc(100vh - 110px);
+        overflow-y: scroll;
+    
+
+        &::-webkit-scrollbar {
+            width: 1px;
+        }
+    
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: darkgrey;
+            outline: 1px solid slategrey;
+        }
+    }
+    .filter {
+        flex-direction: column;
+        gap: 0;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            font-size: 16px;
+        }
+
+        .dropdown {
+            margin: 0 0 20px 0;
+
+            select {
+                height: 25px;
+            }
+        }
+
+        .checkbox {
+            margin: 0 0 20px 0;
+
+            input {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+}

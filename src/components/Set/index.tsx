@@ -2,6 +2,8 @@ import { Button } from "components/Button";
 import { POSTER_URL, SIGNED_IN, WATCHED_LIST } from "const";
 
 import style from "./style.module.scss";
+import { useState } from "react";
+import { Loader } from "components/Loader";
 
 export const Set = ({
   movie,
@@ -12,10 +14,13 @@ export const Set = ({
   isLoading,
   drink,
   getRandomDrink,
+  isDrinkLoading,
 }: any) => {
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
+  const [watchMovieLoading, setWatchMovieLoading] = useState(false);
 
   const watchMovie = () => {
+    setWatchMovieLoading(true);
     const data: any = localStorage.getItem(WATCHED_LIST);
     const previousList = data ? JSON.parse(data) : {};
     const template = {
@@ -31,9 +36,11 @@ export const Set = ({
     previousList[activeUser] = [template, ...(previousList[activeUser] || [])];
 
     localStorage.setItem(WATCHED_LIST, JSON.stringify(previousList));
-
-    setMovie(null);
-    setShowNotification(true);
+    setTimeout(() => {
+      setWatchMovieLoading(false);
+      setShowNotification(true);
+      setMovie(null);
+    }, 1000);
   };
 
   return (
@@ -97,7 +104,11 @@ export const Set = ({
                     onClick={getEveningSet}
                   />
                   {activeUser && (
-                    <Button text="Watch" status={""} onClick={watchMovie} />
+                    <Button
+                      text="Watch"
+                      status={watchMovieLoading ? "loading" : ""}
+                      onClick={watchMovie}
+                    />
                   )}
                 </div>
               </div>
@@ -110,7 +121,7 @@ export const Set = ({
                         DRINK: {drink?.strDrink}
                       </h5>
                       <button className={style.other} onClick={getRandomDrink}>
-                        other
+                        {!isDrinkLoading ? "other" : <Loader />}
                       </button>
                     </div>
                     <div>Glass: {drink?.strGlass}</div>

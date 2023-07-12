@@ -8,6 +8,7 @@ export const Header = () => {
   const navigate = useNavigate();
   const isSignInPage = window.location.pathname === "/sign-in";
   const isAlreadyLoggedIn = localStorage.getItem(SIGNED_IN);
+  const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
 
   return (
     <header className={style.header}>
@@ -16,13 +17,15 @@ export const Header = () => {
         <div className={style.company}>TES</div>
       </div>
       <div className={style.navigation}>
-        <Link to="/">GET EVENING SET</Link>
+        <Link to="/">{!isMobileDevice ? "GET EVENING SET" : "GET SET"}</Link>
         {isAlreadyLoggedIn && (
           <>
             <span className={style.stick}></span>
-            <Link to="/movies-list">MY MOVIES LIST</Link>
+            <Link to="/movies-list">
+              {!isMobileDevice ? "MY MOVIES LIST" : "MOVIES"}
+            </Link>
             <span className={style.stick}></span>
-            <Link to="/drink">MY DRINK</Link>
+            <Link to="/drink">{!isMobileDevice ? "MY DRINK" : "DRINK"}</Link>
           </>
         )}
       </div>

@@ -9,6 +9,7 @@ import { Modal } from "components/Modal";
 export const MoviesList = () => {
   const [movies, setMovies] = useState<any>(null);
   const [movie, setMovie] = useState<any>(null);
+
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
 
   // const [streamingLinks, setStreamingLinks] = useState<any>([]);
@@ -189,7 +190,11 @@ export const MoviesList = () => {
                   </span>
                 </div>
               </div>
-              <p className={style.overview}>{movie?.overview}</p>
+              <p className={style.overview}>
+                {movie?.overview?.length > 300
+                  ? `${movie?.overview.slice(0, 300)}...`
+                  : movie?.overview}
+              </p>
             </div>
           </div>
         </Modal>

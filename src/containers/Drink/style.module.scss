@@ -53,3 +53,38 @@
         }
     }
 }
+
+
+@media screen and (max-width:1220px) {
+
+    .container {
+        height: calc(100vh - 96px);
+        .empty {
+            font-size: 40px;
+            margin: 100px 0 0 0;
+        }
+
+        .drinkContainer {
+            flex-direction: column;
+            max-width: calc(90vw - 40px);
+
+            img {
+                max-width: 80vw;
+            }
+
+            .drinkInfo {
+                max-width: 90vw;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                font-size: 16px;
+
+                .drinkTitle {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+
+
+}

@@ -62,3 +62,19 @@
         }
     }
 }
+
+@media screen and (max-width: 740px) {
+    .container {
+        form {
+            .input {
+                input {
+                    width: 80vw; 
+                }
+            }
+            button {
+                width: 80vw;
+            }
+        }
+    }
+    
+}

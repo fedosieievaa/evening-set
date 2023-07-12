@@ -20,3 +20,10 @@ code {
 * {
   text-shadow: 1px 1px black;
 }
+
+@media screen and (max-width:1220px) {
+  body{
+    min-height: 100vh;
+    height: 100%;
+  }
+}

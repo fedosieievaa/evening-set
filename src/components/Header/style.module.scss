@@ -63,3 +63,37 @@
         font-size: 18px;
     }
 }
+
+@media screen and (max-width: 740px) {
+    .header {
+        padding: 15px;
+        .companyLogo {
+    
+            .logo {
+                width: 20px;
+            }
+    
+            .company {
+                font-size: 16px;
+            }
+        }
+    
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+    
+            a {
+    
+                font-size: 12px;
+            }
+        }
+    
+        .button {
+            width: 85px;
+            height: 20px;
+            font-size: 12px;
+        }
+    }
+}

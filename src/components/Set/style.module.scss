@@ -10,9 +10,10 @@
 }
 
 .container {
-    padding: 100px 80px 0 100px;
+    padding: 100px 0 0 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 80px;
 
     .moviePoster {
@@ -22,6 +23,8 @@
     }
 
     .information {
+        max-width: 900px;
+
         .title {
             margin: 0 0 55px 0;
             color: #CCFF00;
@@ -68,6 +71,7 @@
     align-items: center;
     gap: 20px;
     background: rgba(0, 0, 0, 0.184);
+    max-width: calc(900px - 42px);
 
     img {
         border-radius: 10px;
@@ -101,4 +105,85 @@
             }
         }
     }
+}
+
+@media screen and (max-width:1220px) {
+    .container {
+        padding: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 80px;
+
+        .moviePoster {
+            max-width: 90vw;
+        }
+
+        .information {
+            padding: 0 20px;
+            max-width: 90vw;
+            margin: 0 auto 40px auto;
+
+            .title {
+                margin: 0 0 25px 0;
+                font-size: 25px;
+                text-align: center;
+            }
+
+            .additional {
+                justify-content: center;
+
+                .vote_average {
+                    font-size: 20px;
+                }
+
+                .genres {
+                    font-size: 20px;
+                }
+            }
+
+            .overview {
+                font-size: 18px;
+
+            }
+
+            .buttons {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+
+                button {
+                    max-width: 40vw;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
+    .drinkContainer {
+        margin: 0 auto 50px auto;
+        justify-content: center;
+        flex-direction: column;
+        max-width: calc(90vw - 40px);
+        background: rgba(255, 255, 255, 0.13);
+
+        img {
+            margin: 0 0 30px 0;
+        }
+
+        .drinkInfo {
+            width: 100%;
+
+            .top {
+                display: flex;
+                justify-content: space-between;
+
+                .drinkTitle {
+                    font-size: 22px;
+                    margin: 0 0 20px 0;
+                }
+            }
+        }
+    }
+
 }

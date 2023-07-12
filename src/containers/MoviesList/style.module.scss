@@ -129,52 +129,149 @@
     text-transform: uppercase;
     margin: 300px 0 0 0;
 }
-.container{
+
+.container {
     display: flex;
     align-items: center;
     gap: 50px;
+
     .moviePoster {
-    box-shadow: 1px 1px 20px 1px #FFFFFF;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.044);
+        box-shadow: 1px 1px 20px 1px #FFFFFF;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.044);
+    }
+
+    .information {
+        width: 600px;
+
+        .title {
+            margin: 0 0 55px 0;
+            color: #CCFF00;
+            font-family: 'Gurajada';
+            font-size: 45px;
+            text-shadow: none;
+            text-align: left;
+        }
+
+        .additional {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            text-align: left;
+
+            .vote_average {
+                font-family: 'Imprima';
+                font-size: 24px;
+            }
+
+            .genres {
+                font-family: 'Imprima';
+                font-size: 28px;
+            }
+        }
+
+        .overview {
+            text-align: left;
+            font-size: 22px;
+            margin: 20px 0 60px 0;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: end;
+            gap: 50px;
+        }
+    }
 }
 
-.information {
-    width: 600px;
-    .title {
-        margin: 0 0 55px 0;
-        color: #CCFF00;
-        font-family: 'Gurajada';
-        font-size: 45px;
-        text-shadow: none;
-        text-align: left;
+@media screen and (max-width:1220px) {
+    .movies {
+        padding: 0 20px;
+        gap: 10px;
+        max-height: calc(100vh - 100px);
+
+        .movie {
+            padding: 0 10px;
+            width: calc(90vw - 20px);
+            height: 80px;
+            margin: 0 auto;
+
+            h4 {
+                font-size: 16px;
+
+                span {
+                    font-size: 16px;
+                }
+            }
+
+            .buttons {
+                gap: 10px;
+
+                button {
+
+                    &.good,
+                    &.bad {
+                        width: 30px;
+                        height: 30px;
+                    }
+                }
+
+                .evaluate {
+                    width: 80px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+
+                .delete {
+                    width: 80px;
+                    height: 20px;
+                    font-size: 10px;
+                }
+            }
+        }
     }
 
-    .additional {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-        text-align: left;
-        .vote_average {
-            font-family: 'Imprima';
-            font-size: 24px;
+    .empty {
+        font-size: 40px;
+        margin: 100px 0 0 0;
+    }
+
+    .container {
+        flex-direction: column;
+
+        .moviePoster {
+            max-width: 80vw;
         }
 
-        .genres {
-            font-family: 'Imprima';
-            font-size: 28px;
+        .information {
+            max-width: 90vw;
+
+            .title {
+                margin: 0 0 15px 0;
+                font-size: 25px;
+                text-align: center;
+            }
+
+            .additional {
+
+                justify-content: center;
+
+                .vote_average {
+                    font-size: 16px;
+                }
+
+                .genres {
+                    font-size: 16px;
+                }
+            }
+
+            .overview {
+                text-align: center;
+                font-size: 14px;
+                margin: 10px;
+            }
         }
     }
-
-    .overview {
-        text-align: left;
-        font-size: 22px;
-        margin: 20px 0 60px 0;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: end;
-        gap: 50px;
-    }
-}}
+}
