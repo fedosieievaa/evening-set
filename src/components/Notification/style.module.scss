@@ -1,9 +1,9 @@
 .notification {
     position: absolute;
     z-index: 1000;
-    bottom: 5px;
+    bottom: 80px;
     left: 5px;
-    background: #FFFFFF;
+    background: rgba(0, 0, 0, 0.492);
     width: 150px;
     height: 50px;
     border-radius: 10px;
@@ -11,4 +11,10 @@
     justify-content: center;
     align-items: center;
     color: #CCFF00;
+}
+
+@media screen and (max-width: 740px){
+    .notification {
+        bottom: 50px;
+    }
 }

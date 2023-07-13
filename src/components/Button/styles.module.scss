@@ -5,7 +5,7 @@
         width: 200px;
         height: 38px;
         border-radius: 10px;
-        border: 2px solid #CF0;
+        border: 1px solid #CF0;
         background: rgba(217, 217, 217, 0.00);
         cursor: pointer;
         user-select: none;
@@ -14,7 +14,11 @@
         font-family: 'Imprima';
         font-size: 18px;
         text-transform: uppercase;
-
+        transition: all 0.2s ease-in-out;
+        &:hover{
+            border: 1px solid transparent;
+            background: rgba(204, 255, 0, 0.49);
+        }
         &.error {
             background: rgb(223, 156, 156);
             &:hover {

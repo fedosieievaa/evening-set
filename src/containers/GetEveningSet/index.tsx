@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { Notification } from "components/Notification";
-import { Button } from "components/Button";
-import { Layout } from "components/Layout";
-import { Set } from "components/Set";
-
 import {
   API_KEY,
   DRINK_URL,
@@ -13,6 +8,11 @@ import {
   DRINK,
   SIGNED_IN,
 } from "const";
+import { Notification } from "components/Notification";
+import { Button } from "components/Button";
+import { Layout } from "components/Layout";
+import { Set } from "components/Set";
+import { Filter } from "components/Filter";
 
 import style from "./style.module.scss";
 
@@ -20,11 +20,13 @@ export const GetEveningSet = () => {
   const [movie, setMovie] = useState<any>(null);
   const [genres, setGenres] = useState<any>([]);
   const [genre, setGenre] = useState<string>();
+  const [selectedYear, setSelectedYear] = useState("");
   const [drink, setDrink] = useState(null);
   const [generateDrink, setGenerateDrink] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDrinkLoading, setIsDrinkLoading] = useState(false);
+  const [selectedRating, setSelectedRating] = useState("");
 
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
 
@@ -38,11 +40,22 @@ export const GetEveningSet = () => {
       });
   }, []);
 
-  async function getEveningSet() {
+  const getEveningSet = async () => {
     setIsLoading(true);
-    const randomPage = Math.floor(Math.random() * MAX_PAGES) + 1;
+    const noFilters: any = !genre && !selectedYear && !selectedRating;
+    const max = noFilters ? MAX_PAGES : 3;
+    const randomPage = Math.floor(Math.random() * max) + 1;
+
+    let range: any = null;
+    if (selectedRating) {
+      range = selectedRating.split("-");
+    }
     const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}${
       genre ? "&with_genres=" + genre : ""
+    }${selectedYear ? "&primary_release_year=" + selectedYear : ""}${
+      range
+        ? "&vote_average.gte=" + range[0] + "&vote_average.lte=" + range[1]
+        : ""
     }&page=${randomPage}`;
     try {
       const response = await fetch(url);
@@ -72,9 +85,9 @@ export const GetEveningSet = () => {
       console.error("Error:", error);
       throw new Error("Failed to fetch a random movie.");
     }
-  }
+  };
 
-  async function fetchGenres() {
+  const fetchGenres = async () => {
     const apiUrl = `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`;
 
     try {
@@ -86,9 +99,9 @@ export const GetEveningSet = () => {
       console.error("Error:", error);
       throw new Error("Failed to fetch genres.");
     }
-  }
+  };
 
-  async function getRandomDrink() {
+  const getRandomDrink = async () => {
     setIsDrinkLoading(true);
     const response = await fetch(DRINK_URL);
     const data = await response.json();
@@ -100,45 +113,36 @@ export const GetEveningSet = () => {
       drinks[activeUser] = data.drinks[0];
       localStorage.setItem(DRINK, JSON.stringify(drinks));
     }
-  }
+  };
 
   return (
     <Layout>
       <div className={style.overflow}>
-        <div className={style.filter}>
-          <div className={style.dropdown}>
-            <label htmlFor="genre">Select Genre:</label>
-            <select
-              id="genre"
-              onChange={(e) => {
-                setGenre(e.target.value);
-              }}
-            >
-              {genres.map((genre: any) => (
-                <option key={genre?.id} value={genre?.id}>
-                  {genre?.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className={style.checkbox}>
-            <label htmlFor="drink">Generate a drink:</label>
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                setGenerateDrink(e.target.checked);
-              }}
-            />
-          </div>
-        </div>
+        <Filter
+          setGenre={setGenre}
+          genres={genres}
+          selectedYear={selectedYear}
+          selectedRating={selectedRating}
+          setGenerateDrink={setGenerateDrink}
+          setSelectedYear={setSelectedYear}
+          setSelectedRating={setSelectedRating}
+        />
         {!movie && (
-          <div className={style.getMovieButton}>
-            <Button
-              text="Get Evening Set"
-              status={isLoading ? "loading" : ""}
-              onClick={getEveningSet}
-            />
-          </div>
+          <>
+            <div className={style.getMovieButton}>
+              <Button
+                text="Get Evening Set"
+                status={isLoading ? "loading" : ""}
+                onClick={getEveningSet}
+              />
+            </div>
+            <div className={style.description}>
+              In case you don't know what to watch press the "GET EVENING SET"
+              button. Filter it by genre & year. If you want to have a drink
+              too, check the "GENERATE A DRINK" checkbox.{" "}
+              <span>Have a nice evening!</span>
+            </div>
+          </>
         )}
         <Set
           movie={movie}

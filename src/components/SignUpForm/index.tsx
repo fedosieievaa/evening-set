@@ -38,13 +38,22 @@ export const SignUpForm = () => {
       return;
     }
 
-    const userData = { email, password };
+    const userData = { email: email.trim(), password: password.trim() };
     const prevData = localStorage.getItem(USERS);
     const prevUsers = prevData ? JSON.parse(prevData) : [];
+
+    const isAlreadyExist = prevUsers.find(
+      (user: { email: string; password: string }) => user.email === email
+    );
+
+    if (isAlreadyExist) {
+      setErrorMessage("User already exists.");
+      return;
+    }
+
     localStorage.setItem(USERS, JSON.stringify([...prevUsers, userData]));
     localStorage.setItem(SIGNED_IN, JSON.stringify(email));
     navigate("/");
-
     setEmail("");
     setPassword("");
     setErrorMessage("");

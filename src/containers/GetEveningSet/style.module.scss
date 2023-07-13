@@ -1,75 +1,22 @@
-.filter {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    user-select: none;
-
-    label {
-        text-transform: uppercase;
-        margin: 0 10px 0 0;
-        font-family: 'Gurajada';
-        font-size: 45px;
-    }
-
-    .dropdown {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0 50px 0;
-
-        select {
-            border: 1px solid #CCFF00;
-            background: #FFF;
-            background: none;
-            width: 150px;
-            height: 38px;
-            text-align: center;
-            border-radius: 10px;
-            background: rgba(217, 217, 217, 0);
-            background: none;
-            color: #FFF;
-            font-family: "Imprima";
-            font-size: 18px;
-
-            option {
-                color: black;
-                border: 1px solid #CCFF00;
-            }
-        }
-    }
-
-    .checkbox {
-        display: flex;
-
-        input {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            user-select: none;
-        }
-    }
-}
 
 .getMovieButton {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
-
-@media screen and (max-width:1440px) {
-    .filter {
-        label {
-            font-size: 28px;
-        }
-        .checkbox {
-            input {
-                width: 25px;
-                height: 25px;
-            }
-        }
+.description{
+    max-width: 50%;
+    font-size: 45px;
+    text-align: center;
+    margin: 100px auto 0;
+    font-weight: 700;
+    span{
+        display: block;
+        text-transform: uppercase;
+        margin: 80px 0 0 0;
     }
 }
+
 
 @media screen and (max-width: 740px) {
     .overflow{
@@ -90,31 +37,14 @@
             outline: 1px solid slategrey;
         }
     }
-    .filter {
-        flex-direction: column;
-        gap: 0;
-        justify-content: center;
-        align-items: center;
-
-        label {
-            font-size: 16px;
-        }
-
-        .dropdown {
-            margin: 0 0 20px 0;
-
-            select {
-                height: 25px;
-            }
-        }
-
-        .checkbox {
-            margin: 0 0 20px 0;
-
-            input {
-                width: 15px;
-                height: 15px;
-            }
+    .description{
+        max-width: 90%;
+        font-size: 25px;
+        margin: 50px auto 0;
+        span{
+            display: block;
+            text-transform: uppercase;
+            margin: 40px 0 0 0;
         }
     }
 }

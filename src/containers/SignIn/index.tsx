@@ -1,8 +1,8 @@
+import { POSTER_URL } from "const";
+import { Layout } from "components/Layout";
 import { SignInForm } from "components/SignInForm";
 
 import style from "./style.module.scss";
-import { Layout } from "components/Layout";
-import { POSTER_URL } from "const";
 
 export const SignIn = () => {
   return (
@@ -11,7 +11,7 @@ export const SignIn = () => {
         style={{
           backgroundImage: `url(${POSTER_URL}${
             localStorage.getItem(POSTER_URL) ||
-            "/vYbSNn5u1YzoBE0akLRCTZN5k7m.jpg"
+            "/wRxLAw4l17LqiFcPLkobriPTZAw.jpg"
           })`,
         }}
         className={style.backdrop}

@@ -1,12 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import logo from "./logo.svg";
-import style from "./style.module.scss";
 import { POSTER_URL, SIGNED_IN } from "const";
+import logo from "./logo.svg";
+
+import style from "./style.module.scss";
+
+const PAGES = {
+  main: "/",
+  list: "/movies-list",
+  drink: "/drink",
+};
 
 export const Header = () => {
   const navigate = useNavigate();
-  const isSignInPage = window.location.pathname === "/sign-in";
+  const pathname = window.location.pathname;
+  const isSignInPage = pathname === "/sign-in";
   const isAlreadyLoggedIn = localStorage.getItem(SIGNED_IN);
   const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
 
@@ -17,15 +25,28 @@ export const Header = () => {
         <div className={style.company}>TES</div>
       </div>
       <div className={style.navigation}>
-        <Link to="/">{!isMobileDevice ? "GET EVENING SET" : "GET SET"}</Link>
+        <Link
+          to={PAGES.main}
+          className={pathname === PAGES.main ? style.active : ""}
+        >
+          {!isMobileDevice ? "GET EVENING SET" : "GET SET"}
+        </Link>
         {isAlreadyLoggedIn && (
           <>
             <span className={style.stick}></span>
-            <Link to="/movies-list">
+            <Link
+              to={PAGES.list}
+              className={pathname === PAGES.list ? style.active : ""}
+            >
               {!isMobileDevice ? "MY MOVIES LIST" : "MOVIES"}
             </Link>
             <span className={style.stick}></span>
-            <Link to="/drink">{!isMobileDevice ? "MY DRINK" : "DRINK"}</Link>
+            <Link
+              to={PAGES.drink}
+              className={pathname === PAGES.drink ? style.active : ""}
+            >
+              {!isMobileDevice ? "MY DRINK" : "DRINK"}
+            </Link>
           </>
         )}
       </div>

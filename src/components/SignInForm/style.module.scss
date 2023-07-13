@@ -59,6 +59,11 @@
             font-family: 'Imprima';
             font-size: 18px;
             margin: 20px auto 0 auto;
+            transition: all 0.2s ease-in-out;
+            &:hover{
+                border: 1px solid transparent;
+                background: rgba(204, 255, 0, 0.49);
+            }
         }
     }
 }

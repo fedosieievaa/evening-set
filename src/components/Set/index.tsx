@@ -1,9 +1,10 @@
-import { Button } from "components/Button";
+import { useEffect, useState } from "react";
+
 import { POSTER_URL, SIGNED_IN, WATCHED_LIST } from "const";
+import { Button } from "components/Button";
+import { Loader } from "components/Loader";
 
 import style from "./style.module.scss";
-import { useState } from "react";
-import { Loader } from "components/Loader";
 
 export const Set = ({
   movie,
@@ -18,6 +19,14 @@ export const Set = ({
 }: any) => {
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
   const [watchMovieLoading, setWatchMovieLoading] = useState(false);
+  const [currentMovieGenres, setCurrentMovieGenres] = useState<any>([]);
+
+  useEffect(() => {
+    const data = genres?.filter((genre: any, i: number) =>
+      movie?.genre_ids?.includes(genre.id)
+    );
+    setCurrentMovieGenres(data);
+  }, [movie]);
 
   const watchMovie = () => {
     setWatchMovieLoading(true);
@@ -30,15 +39,25 @@ export const Set = ({
       isGood: null,
     };
 
-    movie?.backdrop_path &&
-      localStorage.setItem(POSTER_URL, movie?.backdrop_path);
+    if (activeUser) {
+      movie?.backdrop_path &&
+        localStorage.setItem(POSTER_URL, movie?.backdrop_path);
+      previousList[activeUser] = [
+        template,
+        ...(previousList[activeUser] || []),
+      ];
 
-    previousList[activeUser] = [template, ...(previousList[activeUser] || [])];
+      localStorage.setItem(WATCHED_LIST, JSON.stringify(previousList));
+    }
 
-    localStorage.setItem(WATCHED_LIST, JSON.stringify(previousList));
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(
+      `${movie?.title} ${movie?.release_date.split("-")[0]}`
+    )}`;
+    window.open(searchUrl, "_blank");
+
     setTimeout(() => {
       setWatchMovieLoading(false);
-      setShowNotification(true);
+      activeUser && setShowNotification(true);
       setMovie(null);
     }, 1000);
   };
@@ -50,7 +69,7 @@ export const Set = ({
           backgroundImage: `url(${POSTER_URL}${
             movie?.backdrop_path ||
             localStorage.getItem(POSTER_URL) ||
-            "/vYbSNn5u1YzoBE0akLRCTZN5k7m.jpg"
+            "/wRxLAw4l17LqiFcPLkobriPTZAw.jpg"
           })`,
         }}
         className={style.backdrop}
@@ -72,18 +91,15 @@ export const Set = ({
                 </h2>
                 <div className={style.additional}>
                   <div className={style.genres}>
-                    {genres.map((genre: any, i: number) => {
-                      if (movie.genre_ids.includes(genre.id)) {
-                        return (
-                          <>
-                            <span key={genre.id}>{genre.name} </span>
-                            {/* {genre.id !==
-                              movie.genre_ids[movie.genre_ids.length - 1] &&
-                              ", "}{" "} */}
-                            {/* // TODO:fix */}
-                          </>
-                        );
-                      }
+                    {currentMovieGenres.map((genre: any, i: number) => {
+                      return (
+                        <>
+                          <span key={`m-${genre.id}`}>{genre.name}</span>
+                          {genre.id !==
+                            currentMovieGenres[currentMovieGenres.length - 1]
+                              .id && ", "}{" "}
+                        </>
+                      );
                     })}
                   </div>
                   <div className={style.vote_average}>
@@ -103,13 +119,11 @@ export const Set = ({
                     status={isLoading ? "loading" : ""}
                     onClick={getEveningSet}
                   />
-                  {activeUser && (
-                    <Button
-                      text="Watch"
-                      status={watchMovieLoading ? "loading" : ""}
-                      onClick={watchMovie}
-                    />
-                  )}
+                  <Button
+                    text="Watch"
+                    status={watchMovieLoading ? "loading" : ""}
+                    onClick={watchMovie}
+                  />
                 </div>
               </div>
               {drink && (

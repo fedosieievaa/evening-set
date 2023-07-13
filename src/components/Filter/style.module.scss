@@ -1,0 +1,102 @@
+.filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    user-select: none;
+    margin: 20px 0 0 0;
+
+    label {
+        margin: 0 10px 0 0;
+        font-family: 'Gurajada';
+        font-size: 25px;
+    }
+
+    .dropdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 0 50px 0;
+
+        select {
+            border: 1px solid #CCFF00;
+            background: #FFF;
+            background: none;
+            width: 150px;
+            height: 23px;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba(217, 217, 217, 0);
+            background: none;
+            color: #FFF;
+            font-family: "Imprima";
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            &:hover{
+                border: 1px solid transparent;
+                background: rgba(204, 255, 0, 0.49);
+            }
+            option {
+                color: black;
+                border: 1px solid #CCFF00;
+            }
+        }
+    }
+
+    .checkbox {
+        display: flex;
+
+        input {
+            width: 23px;
+            height: 23px;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}
+
+
+@media screen and (max-width:1440px) {
+    .filter {
+        label {
+            font-size: 28px;
+        }
+        .checkbox {
+            input {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .filter {
+        flex-direction: column;
+        gap: 0;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            font-size: 16px;
+        }
+
+        .dropdown {
+            margin: 0 0 20px 0;
+
+            select {
+                height: 25px;
+            }
+        }
+
+        .checkbox {
+            margin: 0 0 30px 0;
+
+            input {
+                width: 15px;
+                height: 15px;
+            }
+        }
+    }
+}

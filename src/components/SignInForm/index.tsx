@@ -11,12 +11,14 @@ export const SignInForm = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [users, setUsers] = useState<any>([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const data = localStorage.getItem(USERS);
     if (data) {
       setUsers(JSON.parse(data));
     }
   }, []);
+
   const handleEmailChange = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -51,7 +53,6 @@ export const SignInForm = () => {
 
     localStorage.setItem(SIGNED_IN, JSON.stringify(email));
     navigate("/");
-
     setEmail("");
     setPassword("");
     setErrorMessage("");

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Layout } from "components/Layout";
+
 import { API_KEY, POSTER_URL, SIGNED_IN, WATCHED_LIST } from "const";
-import style from "./style.module.scss";
+import { Layout } from "components/Layout";
 import { Modal } from "components/Modal";
 
-// const justWatchUrl = "https://apis.justwatch.com/content/titles/movie";
+import style from "./style.module.scss";
 
 export const MoviesList = () => {
   const [movies, setMovies] = useState<any>(null);
@@ -12,17 +12,15 @@ export const MoviesList = () => {
 
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
 
-  // const [streamingLinks, setStreamingLinks] = useState<any>([]);
-
   useEffect(() => {
     getMovies();
   }, []);
 
-  async function getMovies() {
+  const getMovies = async () => {
     const data: any = localStorage.getItem(WATCHED_LIST);
     const list = data ? JSON.parse(data) : [];
     setMovies(list[activeUser]);
-  }
+  };
 
   const deleteMovie = (id: any) => {
     const data: any = localStorage.getItem(WATCHED_LIST);
@@ -32,7 +30,7 @@ export const MoviesList = () => {
     getMovies();
   };
 
-  const evaluateMovie = (id: any, bool: any) => {
+  const evaluateMovie = (id: any, bool: boolean | null) => {
     const data: any = localStorage.getItem(WATCHED_LIST);
     const list = data ? JSON.parse(data) : {};
     list[activeUser] = list[activeUser].map((movie: any) => {
@@ -51,19 +49,7 @@ export const MoviesList = () => {
     getMovies();
   };
 
-  // async function fetchMovieStream(movieId: any) {
-  //   try {
-  //     const justWatchResponse = await fetch(
-  //       `${justWatchUrl}/${movieId}/locale/en_US`
-  //     );
-  //     const justWatchData = await justWatchResponse.json();
-  //     setStreamingLinks(justWatchData.offers);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
-
-  async function fetchMovieDetails(movieId: any) {
+  const fetchMovieDetails = async (movieId: any) => {
     const movieDetailsUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`;
 
     try {
@@ -73,7 +59,7 @@ export const MoviesList = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <Layout>
@@ -81,30 +67,17 @@ export const MoviesList = () => {
         style={{
           backgroundImage: `url(${POSTER_URL}${
             localStorage.getItem(POSTER_URL) ||
-            "/vYbSNn5u1YzoBE0akLRCTZN5k7m.jpg"
+            "/wRxLAw4l17LqiFcPLkobriPTZAw.jpg"
           })`,
         }}
         className={style.backdrop}
       />
-      {/* {streamingLinks?.length && (
-        <div>
-          {streamingLinks.map((link: any) => {
-            console.log(link);
-            return (
-              <div key={link.provider_id}>
-                <a href={link.urls.standard_web}>{link.provider_name}</a>
-              </div>
-            );
-          })}
-        </div>
-      )} */}
       {movies?.length ? (
         <div className={style.movies}>
           {movies.map((movie: any) => (
             <div key={movie.id} className={style.movie}>
               <h4
                 onClick={() => {
-                  // fetchMovieStream(movie.id);
                   fetchMovieDetails(movie.id);
                 }}
               >
@@ -117,10 +90,13 @@ export const MoviesList = () => {
               </h4>
               <div className={style.buttons}>
                 <div className={style.evaluate}>
-                  {movie.isGood ? (
-                    <button className={style.good} />
-                  ) : movie.isGood === false ? (
-                    <button className={style.bad} />
+                  {movie.isGood || movie.isGood === false ? (
+                    <button
+                      className={movie.isGood ? style.good : style.bad}
+                      onClick={() => {
+                        evaluateMovie(movie.id, null);
+                      }}
+                    />
                   ) : (
                     <>
                       <button
@@ -156,7 +132,7 @@ export const MoviesList = () => {
 
       {movie && (
         <Modal
-          close={function (): void {
+          close={() => {
             setMovie(null);
           }}
         >
@@ -177,6 +153,8 @@ export const MoviesList = () => {
                   {movie.genres.map((genre: any, i: number) => (
                     <>
                       <span key={genre.id}>{genre.name} </span>
+                      {genre.id !==
+                        movie.genres[movie?.genres?.length - 1].id && ", "}
                     </>
                   ))}
                 </div>

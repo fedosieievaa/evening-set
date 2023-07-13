@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+
+import { DRINK, POSTER_URL, SIGNED_IN } from "const";
 import { Layout } from "components/Layout";
 
 import style from "./style.module.scss";
-import { useEffect, useState } from "react";
-import { DRINK, POSTER_URL, SIGNED_IN } from "const";
 
 export const Drink = () => {
   const [drink, setDrink] = useState<any>(null);
@@ -24,7 +25,7 @@ export const Drink = () => {
         style={{
           backgroundImage: `url(${POSTER_URL}${
             localStorage.getItem(POSTER_URL) ||
-            "/vYbSNn5u1YzoBE0akLRCTZN5k7m.jpg"
+            "/wRxLAw4l17LqiFcPLkobriPTZAw.jpg"
           })`,
         }}
         className={style.backdrop}
