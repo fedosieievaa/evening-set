@@ -171,7 +171,12 @@ export const Set = ({
                         {drink?.strIngredient14} {drink?.strIngredient15}
                       </div>
 
-                      <div>Instructions: {drink?.strInstructions}</div>
+                      <div title={drink?.strInstructions}>
+                        Instructions:{" "}
+                        {drink?.strInstructions?.length < 500
+                          ? drink?.strInstructions
+                          : `${drink?.strInstructions?.slice(0, 500)}...`}
+                      </div>
                     </div>
                   </div>
                 )}
@@ -268,8 +273,12 @@ export const Set = ({
                           {drink?.strIngredient12} {drink?.strIngredient13}{" "}
                           {drink?.strIngredient14} {drink?.strIngredient15}
                         </div>
-
-                        <div>Instructions: {drink?.strInstructions}</div>
+                        <div title={drink?.strInstructions}>
+                          Instructions:{" "}
+                          {drink?.strInstructions?.length < 500
+                            ? drink?.strInstructions
+                            : `${drink?.strInstructions?.slice(0, 500)}...`}
+                        </div>
                       </div>
                     </div>
                   )}
