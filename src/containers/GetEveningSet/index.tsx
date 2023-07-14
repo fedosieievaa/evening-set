@@ -18,6 +18,7 @@ import style from "./style.module.scss";
 
 export const GetEveningSet = () => {
   const [movie, setMovie] = useState<any>(null);
+  const [prevMovie, setPrevMovie] = useState<any>(null);
   const [genres, setGenres] = useState<any>([]);
   const [genre, setGenre] = useState<string>();
   const [selectedYear, setSelectedYear] = useState("");
@@ -27,6 +28,7 @@ export const GetEveningSet = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDrinkLoading, setIsDrinkLoading] = useState(false);
   const [selectedRating, setSelectedRating] = useState("");
+  const [isAnimated, setIsAnimated] = useState(false);
 
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
 
@@ -38,6 +40,15 @@ export const GetEveningSet = () => {
       .catch((error) => {
         console.error(error);
       });
+    const isMobileDevice = window.innerWidth <= 768;
+
+    if (!isMobileDevice) {
+      document.body.style.overflowY = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
   }, []);
 
   const getEveningSet = async () => {
@@ -74,11 +85,20 @@ export const GetEveningSet = () => {
       if (ids.includes(randomMovie.id && activeUser)) {
         getEveningSet();
       } else {
+        movie && setIsAnimated(true);
+        setPrevMovie(movie);
         setMovie(randomMovie);
         if (!drink && generateDrink) {
           await getRandomDrink();
         }
         setIsLoading(false);
+        setTimeout(
+          () => {
+            setIsAnimated(false);
+            setPrevMovie(randomMovie);
+          },
+          movie ? 700 : 0
+        );
       }
     } catch (error) {
       setIsLoading(false);
@@ -154,6 +174,8 @@ export const GetEveningSet = () => {
           drink={drink}
           getRandomDrink={getRandomDrink}
           isDrinkLoading={isDrinkLoading}
+          prevMovie={prevMovie}
+          isAnimated={isAnimated}
         />
       </div>
       {showNotification && (

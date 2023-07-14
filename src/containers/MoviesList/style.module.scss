@@ -31,6 +31,11 @@
         flex-shrink: 0;
         border-radius: 19.312px;
         background: rgba(63, 63, 63, 0.44);
+        position: relative;
+
+        &.isDeleting {
+            animation: deleting 1s ease-in-out 1;
+        }
 
         h4 {
             display: flex;
@@ -204,6 +209,15 @@
     }
 }
 
+@keyframes deleting {
+   0%{
+    transform: translate(0, 0) rotate(0);
+   } 
+   100%{
+    transform: translate(100%, 0) rotate(30deg);
+   }
+}
+
 @media screen and (max-width:1220px) {
     .movies {
         padding: 0 20px;
@@ -262,7 +276,7 @@
         flex-direction: column;
 
         .moviePoster {
-            max-width: 80vw;
+            max-width: 40vw;
         }
 
         .information {

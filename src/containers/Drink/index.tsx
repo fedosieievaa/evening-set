@@ -30,8 +30,8 @@ export const Drink = () => {
         }}
         className={style.backdrop}
       />
-      <div className={style.container}>
-        {drink ? (
+      {drink ? (
+        <div className={style.container}>
           <div className={style.drinkContainer}>
             <img src={drink?.strDrinkThumb} alt="Drink" width="400" />
             <div className={style.drinkInfo}>
@@ -59,10 +59,10 @@ export const Drink = () => {
               <div>Instructions: {drink?.strInstructions}</div>
             </div>
           </div>
-        ) : (
-          <div className={style.empty}>You don't have a drink</div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className={style.empty}>You don't have a drink</div>
+      )}
     </Layout>
   );
 };

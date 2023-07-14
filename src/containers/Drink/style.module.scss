@@ -15,15 +15,6 @@
     justify-content: center;
     height: calc(100vh - 200px);
 
-    .empty {
-        color: #CCFF00;
-        font-family: 'Gurajada';
-        font-size: 70px;
-        text-align: center;
-        text-transform: uppercase;
-        margin: 300px 0 0 0;
-    }
-
     .drinkContainer {
         margin: 0;
         border: 1px solid #ccff0040;
@@ -54,15 +45,20 @@
     }
 }
 
+.empty {
+    color: #CCFF00;
+    font-family: 'Gurajada';
+    font-size: 70px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 300px 0 0 0;
+}
 
 @media screen and (max-width:1220px) {
 
     .container {
         height: calc(100vh - 96px);
-        .empty {
-            font-size: 40px;
-            margin: 100px 0 0 0;
-        }
+
 
         .drinkContainer {
             flex-direction: column;
@@ -86,5 +82,8 @@
         }
     }
 
-
+    .empty {
+        font-size: 40px;
+        margin: 100px 0 0 0;
+    }
 }

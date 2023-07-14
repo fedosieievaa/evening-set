@@ -9,6 +9,7 @@ import style from "./style.module.scss";
 export const MoviesList = () => {
   const [movies, setMovies] = useState<any>(null);
   const [movie, setMovie] = useState<any>(null);
+  const [deletedMovie, setDeletedMovie] = useState(null);
 
   const activeUser = localStorage.getItem(SIGNED_IN) || "";
 
@@ -23,11 +24,18 @@ export const MoviesList = () => {
   };
 
   const deleteMovie = (id: any) => {
+    setDeletedMovie(id);
     const data: any = localStorage.getItem(WATCHED_LIST);
-    const list = data ? JSON.parse(data) : {};
-    list[activeUser] = list[activeUser].filter((movie: any) => movie.id !== id);
-    localStorage.setItem(WATCHED_LIST, JSON.stringify(list));
-    getMovies();
+
+    setTimeout(() => {
+      setDeletedMovie(null);
+      const list = data ? JSON.parse(data) : {};
+      list[activeUser] = list[activeUser].filter(
+        (movie: any) => movie.id !== id
+      );
+      localStorage.setItem(WATCHED_LIST, JSON.stringify(list));
+      getMovies();
+    }, 900);
   };
 
   const evaluateMovie = (id: any, bool: boolean | null) => {
@@ -75,7 +83,12 @@ export const MoviesList = () => {
       {movies?.length ? (
         <div className={style.movies}>
           {movies.map((movie: any) => (
-            <div key={movie.id} className={style.movie}>
+            <div
+              key={movie.id}
+              className={`${style.movie} ${
+                deletedMovie === movie.id ? style.isDeleting : ""
+              }`}
+            >
               <h4
                 onClick={() => {
                   fetchMovieDetails(movie.id);
